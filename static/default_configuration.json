@@ -1,0 +1,10 @@
+{
+  "AGGREGATOR_URL": "https://ksigw-test.ee.guardtime.com:8880",
+  "EXTENDER_URL": "https://ksigw-test.ee.guardtime.com:8881",
+  "PUBLICATION_FILE_URL": "https://verify.guardtime.com/ksi-publications.bin",
+  "PUBLICATION_STRING": "",
+  "HASH_ALGORITHM": "SHA-256",
+  "CAN_SIGN": true,
+  "CAN_EXTEND": true,
+  "SUPPORTED_HASH_ALGORITHMS": ["SHA-256", "SHA-384", "SHA-512"]
+}

@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "../.eslintrc"
+  ],
+  "rules": {
+    // Plugins
+    "import/no-unresolved": ["error", { "ignore": ["pdfjs-dist/lib/pdf"]}],
+
+    // ECMAScript 6
+    "no-var": "error"
+  },
+  "globals": {
+    "__webpack_hash__": "readonly"
+  }
+}

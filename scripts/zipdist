@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Archive application for deployment.
+#
+# Usage:
+#   $ zipdist
+
+[[ "$TRACE" ]] && set -x
+
+
+main() {
+   cd dist/ && \
+      zip -r ../gt-pdfjs.$(date '+%Y-%m-%dT%H-%M-%S').zip ./
+}
+
+main $1

@@ -1,0 +1,61 @@
+{
+  "name": "gt-pdfjs",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git@git.ee.guardtime.com:developers/gt-pdfjs.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "webpack-dev-server --mode=development --open",
+    "start:prod": "webpack-dev-server --mode=production",
+    "build": "webpack --mode=production",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "zipdist": "scripts/zipdist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "core-js": "^3.6.5",
+    "css-loader": "^3.6.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jest": "^22.21.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-unicorn": "^7.1.0",
+    "file-loader": "^5.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "jest-when": "^2.7.2",
+    "pdf.js": "git+https://github.com/mozilla/pdf.js.git#v2.3.200",
+    "prettier": "^1.19.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.10.2",
+    "@guardtime/common": "1.0.3",
+    "@guardtime/ksi-js-api": "1.0.3-rc.a4a6ffa",
+    "node-forge": "^0.8.5",
+    "pako": "^1.0.11",
+    "pdfjs-dist": "2.3.200",
+    "valid-url": "^1.0.9",
+    "web-streams-polyfill": "^2.1.1"
+  }
+}

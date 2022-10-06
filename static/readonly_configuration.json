@@ -1,0 +1,11 @@
+{
+  "AGGREGATOR_URL": "",
+  "EXTENDER_URL": "",
+  "PUBLICATION_FILE_URL": "https://verify.guardtime.com/ksi-publications.bin",
+  "PUBLICATION_STRING": "",
+  "HASH_ALGORITHM": "SHA-256",
+  "CAN_SIGN": false,
+  "CAN_EXTEND": false,
+  "READ_ONLY": true,
+  "SUPPORTED_HASH_ALGORITHMS": ["SHA-256", "SHA-384", "SHA-512"]
+}

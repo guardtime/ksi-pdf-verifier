@@ -1,0 +1,57 @@
+pipeline {
+    agent {
+        label 'centos7'
+    }
+    options {
+        gitLabConnection('aggr@git.ee')
+        disableConcurrentBuilds()
+    }
+    triggers {
+        gitlab(triggerOnPush: true, branchFilterType: 'All')
+    }
+    stages {
+        stage('Build') {
+            steps {
+                updateGitlabCommitStatus name: 'build', state: 'running'
+                nodejs(nodeJSInstallationName: 'node10162') {
+                    echo 'Installing dependencies..'
+                    sshagent(credentials : ['9598ef72-0ade-47d7-b578-530de28f8c32']) {
+                        sh 'npm ci'
+                    }
+                    echo 'Linting..'
+                    sh 'npm run lint'
+                    echo 'Testing..'
+                    sh 'npm run test'
+                    echo 'Building..'
+                    sh 'npm run build'
+                }
+                archiveArtifacts artifacts: 'dist/**', fingerprint: true
+            }
+        }
+        stage('Deploy') {
+            when {
+                branch 'master'
+            }
+            steps {
+                sshagent(credentials : ['9598ef72-0ade-47d7-b578-530de28f8c32']) {
+                    echo 'Deploying to nerf.ee.guardtime.com..'
+                    sh 'ssh -o StrictHostKeyChecking=no jenkins@nerf.ee.guardtime.com rm -rf /var/www/html/pdf-dev/*'
+                    sh 'scp -o StrictHostKeyChecking=no -r dist/. jenkins@nerf.ee.guardtime.com:/var/www/html/pdf-dev'
+                    sh 'ssh -o StrictHostKeyChecking=no jenkins@nerf.ee.guardtime.com find "/var/www/html/pdf-dev" -type d -exec chmod 775 {} "\\;"'
+                    sh 'ssh -o StrictHostKeyChecking=no jenkins@nerf.ee.guardtime.com find "/var/www/html/pdf-dev" -type f -exec chmod 774 {} "\\;"'
+                }
+            }
+        }
+    }
+    post {
+        failure {
+            updateGitlabCommitStatus name: 'build', state: 'failed'
+        }
+        success {
+            updateGitlabCommitStatus name: 'build', state: 'success'
+        }
+        always {
+            cleanWs()
+        }
+    }
+}

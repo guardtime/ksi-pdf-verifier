@@ -1,0 +1,823 @@
+:root {
+  --sidebar-width: 400px;
+}
+
+#viewKsiSignatures.toolbarButton::before {
+  content: url(../images/ksi-fingerprint.png);
+}
+
+.secondaryToolbarButton.ksiConfigurationSecondaryToolbarButton::before {
+  content: url(../images/ksi-fingerprint.png);
+}
+
+html[dir='ltr'] #outerContainer.sidebarOpen #errorsWrapper {
+  transition-property: left;
+  left: 200px;
+  left: var(--sidebar-width);
+}
+
+#errorsWrapper {
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+#errorWrapper {
+  background: none repeat scroll 0 0 #FF5555;
+  color: white;
+  padding: 3px;
+  font-size: 0.8em;
+  overflow: auto;
+}
+
+#ksiDownloadWrapper {
+  background: none repeat scroll 0 0 #4BB543;
+  color: white;
+  padding: 3px;
+  font-size: 0.8em;
+  overflow: auto;
+}
+
+#ksiNetworkErrorWrapper {
+  background: none repeat scroll 0 0 #E75480;
+  color: white;
+  padding: 3px;
+  font-size: 0.8em;
+  overflow: auto;
+}
+
+.ksiConfigurationDropdown {
+  width: 260px;
+}
+
+.loadingInProgress #errorsWrapper {
+  top: 37px;
+}
+
+#ksiErrorMessageLeft,
+#downloadMessageLeft,
+#networkErrorLeft {
+  float: left;
+}
+
+#ksiErrorMessageRight,
+#downloadMessageRight {
+  float: right;
+}
+
+#ksiErrorMoreInfo {
+  background-color: #FFFFFF;
+  color: black;
+  padding: 3px;
+  margin: 3px;
+  width: 98%;
+}
+
+.ksiSignature {
+  margin: 10px;
+  padding: 5px;
+  background-color: #575757;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  opacity: 1;
+  user-select: none;
+  overflow: auto;
+}
+
+#ksiSignaturesView {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ksiSidebarButtonsDiv {
+  text-align: center;
+  padding: 0px;
+}
+
+.ksiSidebarButtonDiv {
+  opacity: 0.8;
+  text-align: center;
+  display: inline-block;
+}
+
+.ksiSidebarButton {
+  width: auto;
+  border: 1px solid hsla(0, 0%, 0%, .35);
+  border-color: hsla(0, 0%, 0%, .32) hsla(0, 0%, 0%, .38) hsla(0, 0%, 0%, .42);
+  margin: 0px !important;
+  margin-top: 5px !important;
+}
+
+.ksiConfigurationOverlayDialog {
+  width: 400px;
+  display: inline-block;
+  padding: 15px;
+  border-spacing: 4px;
+  color: hsl(0, 0%, 85%);
+  font-size: 12px;
+  line-height: 14px;
+  background-color: #474747;
+  /* fallback */
+  background-image: url(../../node_modules/pdf.js/web/images/texture.png),
+    linear-gradient(hsla(0, 0%, 32%, .99), hsla(0, 0%, 27%, .95));
+  border: 1px solid hsla(0, 0%, 0%, .5);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ksiConfigurationButton:first-child {
+  margin-right: 3px !important;
+}
+
+.ksiConfigurationWarningWrapper {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #ff3b30;
+}
+
+.ksiConfigurationWarning {
+  color: #ff3b30;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  word-wrap: break-word;
+  font-weight: bold;
+  width: 100%;
+}
+
+/*
+.ksiSignature.active {
+  background-color: #FFF;
+  opacity: 0.8;
+}*/
+
+.arrow {
+  border: solid white;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrow-margin-right {
+  margin-left: auto;
+  margin-right: 6px;
+}
+
+.arrow-up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.arrow-down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.arrow-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.collapsible {
+  color: white;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  outline: none;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  border-radius: 2px;
+  padding: 0 8px;
+  background: rgba(255, 255, 255, 0.24);
+  font-weight: normal;
+  font-size: 12px;
+  margin: 8px 0;
+  transition: all 0.25s ease-in-out;
+}
+
+.active,
+.collapsible:hover {
+  background-color: #575757;
+  transition: all 0.25s ease-in-out;
+}
+
+.credentialContent {
+  overflow: hidden;
+  text-align: left;
+}
+
+.content {
+  padding: 0 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background: rgba(255, 255, 255, 0.24);
+  /* fallback */
+  text-align: left;
+}
+
+#verificationMethodsContent {
+  height: 0;
+  max-height: inherit;
+}
+
+.content>.row:first-child {
+  margin-top: 10px;
+}
+
+.content>.row:last-child {
+  margin-bottom: 10px;
+}
+
+.ksiLabel {
+  padding-right: 3px;
+}
+
+.ksiInput,
+.ksiSelect {
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.column {
+  float: left;
+}
+
+.w30 {
+  width: 30%;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.w69 {
+  width: 69%;
+}
+
+.w50 {
+  width: 50%;
+}
+
+.w60 {
+  width: 60%;
+}
+
+.w39 {
+  width: 39%;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.ta-left {
+  text-align: left;
+}
+
+.ta-right {
+  text-align: right;
+}
+
+.verificationResult {
+  width: 32px;
+  height: auto;
+  float: right;
+}
+
+.verificationMethodIcon {
+  width: 32px;
+  height: auto;
+}
+
+.margin-left-2px {
+  margin-left: 2px;
+}
+
+.text-align-left {
+  text-align: left !important;
+}
+
+.text-align-right {
+  text-align: right !important;
+}
+
+/* Rules for Retina screens */
+@media screen and (min-resolution: 1.1dppx) {
+  #viewKsiSignatures.toolbarButton::before {
+    content: url(../images/ksi-fingerprint@2x.png);
+  }
+
+  .secondaryToolbarButton.ksiConfigurationSecondaryToolbarButton::before {
+    content: url(../images/ksi-fingerprint@2x.png);
+  }
+}
+
+/* General rules for printing. */
+@media print {
+
+  #ksiErrorWrapper,
+  #ksiDownloadWrapper,
+  #ksiNetworkErrorWrapper {
+    display: none;
+  }
+}
+
+.aside {
+  background: #393939;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 5px 10px 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 210px;
+}
+
+.ksiSignatures-blocks {
+  flex: 1 1 100%;
+  overflow: auto;
+}
+
+.ksiSignatures-footer {
+  flex: 0 0 auto;
+  padding: 10px;
+}
+
+.ksiSignatures-footer .ksiButton {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.ksiSignatures-footer .ksiButton+.ksiButton {
+  margin-top: 4px;
+}
+
+.ksiSignature {
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  -webkit-filter: grayscale(60%);
+  filter: grayscale(60%);
+  opacity: 0.6;
+  transition: opacity 250ms;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ksiSignature:hover {
+  opacity: 0.7;
+}
+
+.ksiSignature.active {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.ksiSignature.active footer {
+  max-height: 60px;
+}
+
+.ksiSignature * {
+  box-sizing: border-box;
+}
+
+.ksiSignature header {
+  padding: 10px 10px 5px 44px;
+  position: relative;
+}
+
+.ksiSignature header:before {
+  background: transparent none center/cover no-repeat;
+  content: "";
+  display: block;
+  height: 24px;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  width: 24px;
+}
+
+.ksiSignature header h4 {
+  font-size: 15px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.ksiSignature header p {
+  font-size: 12px;
+  line-height: 15px;
+  margin: 0;
+  opacity: 0.5;
+}
+
+.ksiSignature footer {
+  display: flex;
+  max-height: 0;
+  overflow: hidden;
+  padding: 5px;
+  transition: max-height 200ms;
+}
+
+.ksiSignature footer .ksiButton {
+  flex: 1 1 100%;
+}
+
+.ksiSignature footer .ksiButton--square {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+ICA8cGF0aCBkPSJNMjcgMjRjMCAyLTEgMy0zIDNzLTMtMS0zLTMgMS0zIDMtMyAzIDEgMyAzem0tMTMtM2MtMiAwLTMgMS0zIDNzMSAzIDMgMyAzLTEgMy0zLTEtMy0zLTN6bTIwIDBjLTIgMC0zIDEtMyAzczEgMyAzIDMgMy0xIDMtMy0xLTMtMy0zeiIvPjwvc3ZnPg==);
+  flex: 0 0 24px;
+  margin-left: 3px;
+}
+
+.ksiSignature--latest {
+  background-color: #595959;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.ksiSignature--valid,
+.ksiSignature--invalid,
+.ksiSignature--inconclusive {
+  background-color: white;
+}
+
+.ksiSignature--valid header:before {
+  background: #107c10;
+  border-radius: 50%;
+  background-image: url(../images/signature-signed.svg);
+  background-position: center;
+  background-size: contain;
+}
+
+.ksiSignature--invalid header:before {
+  background: #ff3b30;
+  border-radius: 50%;
+  background-image: url(../images/signature-invalid.svg);
+  background-position: center;
+  background-size: contain;
+}
+
+.ksiSignature--invalid h4 {
+  color: #ff3b30;
+}
+
+.ksiSignature--unsigned header:before {
+  background: #ffae42;
+  border-radius: 50%;
+  background-image: url(../images/signature-unsigned.svg);
+}
+
+.ksiSignature--inconclusive header:before {
+  background: #ffae42;
+  border-radius: 50%;
+  background-image: url(../images/signature-na.svg);
+}
+
+.ksiSignature--pub header p:after,
+.ksiSignature--cal header p:after,
+.ksiSignature--key header p:after {
+  background-color: #555;
+  border-radius: 2px;
+  color: white;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-left: 5px;
+  padding: 0 3px;
+  vertical-align: top;
+}
+
+.ksiSignature--pub header p:after {
+  content: "pub";
+}
+
+.ksiSignature--cal header p:after {
+  content: "cal";
+}
+
+.ksiSignature--key header p:after {
+  content: "key";
+}
+
+.ksiButton {
+  border: none;
+  border-radius: 2px;
+  background-color: #e5e5e5;
+  line-height: 24px;
+  font-size: 12px;
+  outline: none;
+  padding: 0 5px;
+  text-align: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.ksiButton:hover {
+  background-color: #d9d9d9;
+}
+
+.ksiButton:active {
+  -webkit-transform: translateY(1px);
+  transform: translateY(1px);
+}
+
+.ksiButton:disabled {
+  opacity: 0.6;
+}
+
+.ksiButton--main {
+  background-color: #1a1a1a;
+  color: #e5e5e5;
+}
+
+.ksiButton--main:hover {
+  background-color: black;
+}
+
+.ksiButton--neutral {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px #808080;
+  color: silver;
+}
+
+.ksiButton--neutral:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ksiButton--toggle {
+  padding-left: 24px;
+  position: relative;
+}
+
+.ksiButton--toggle:before {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+ICA8cGF0aCBmaWxsPSIjZmZmIiBkPSJNMzMgMjRMMTUgMTR2MjB6Ii8+PC9zdmc+);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+}
+
+.ksiButton--toggle.expand:before {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#ksiWarningOverlay .dialog {
+  background-color: #464746;
+  box-sizing: border-box;
+  padding: 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.ksiConfigurationWarning {
+  border-color: #ff3b30;
+  box-sizing: border-box;
+  color: white;
+  font-size: 12px;
+  font-weight: normal;
+  margin: 5px 0;
+  padding: 8px 16px;
+}
+
+.ksiConfigurationWarning legend {
+  color: #ff3b30;
+  font-size: inherit;
+  font-weight: bold;
+  padding: 0 5px;
+  margin-left: -5px;
+}
+
+#ksiErrorWrapper {
+  background-color: #ff3b30;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16px;
+}
+
+#ksiErrorWrapper .ksiButton {
+  background-color: transparent;
+}
+
+#ksiErrorWrapper [data-action="toggle-errorMessage"] {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+#ksiErrorWrapper [data-action="close-error"] {
+  flex: 0 0 auto;
+}
+
+#ksiErrorWrapper textarea {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  color: inherit;
+  display: block;
+  font-family: monospace;
+  font-size: 13px;
+  flex: 1 1 100%;
+  line-height: 16px;
+  margin: 0;
+  outline: none;
+  padding: 0 10px;
+  resize: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+#ksiErrorWrapper #ksiErrorMoreInfo {
+  max-height: 0;
+  overflow: hidden;
+}
+
+#ksiErrorWrapper .expand~#ksiErrorMoreInfo {
+  max-height: 600px;
+  padding: 10px;
+  margin-top: 16px;
+}
+
+
+#toolbarViewerMiddle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+}
+
+.text-field-wrapper label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.text-field-wrapper input {
+  height: 28px;
+  border-radius: 2px;
+  padding: 0 8px;
+  border: none;
+}
+
+.text-field-wrapper select {
+  height: 28px;
+  border-radius: 2px;
+  padding: 0 8px;
+  border: none;
+}
+
+.checkbox-row {
+  display: flex;
+  height: 28px;
+  align-items: center;
+}
+
+.checkbox-row label {
+  margin-left: 8px;
+}
+
+.toggler-with-switcher {
+  display: flex;
+  height: 28px;
+  margin: 8px 0;
+}
+
+.toggler-wrapper {
+  display: grid;
+  grid-template-columns: auto min-content;
+  align-items: center;
+  text-align: left;
+  height: 100%;
+  width: 100%;
+}
+
+.toggler-wrapper .toggler {
+  position: relative;
+  display: flex;
+}
+
+.toggler-wrapper input[type="checkbox"] {
+  position: absolute;
+  height: 28px;
+  width: 100%;
+  z-index: 9;
+  top: -7px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-appearance: unset;
+  cursor: pointer;
+}
+
+.toggler-wrapper .toggler .toggler-body {
+  background-color: #000;
+  width: 32px;
+  height: 14px;
+  border-radius: 20px;
+  opacity: .38;
+  transition: all 0.25s ease-in-out;
+}
+
+.toggler-wrapper .toggler .toggler-trigger {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: -3px;
+  box-shadow: 0 3px 6px #00000035;
+  transition: all 0.25s ease-in-out;
+}
+
+.toggler-wrapper input[type="checkbox"]:checked+.toggler-body {
+  background-color: #3B89FD;
+  opacity: .5;
+}
+
+.toggler-wrapper input[type="checkbox"]:checked+.toggler-body+.toggler-trigger {
+  transition: all 0.25s ease-in-out;
+  transform: translate(14px, 0);
+  background: #3B89FD;
+}
+
+.toggler-wrapper .toggler label {
+  margin-left: 8px;
+}
+
+
+.radio-group-inline {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+  text-align: left;
+}
+
+.radio-group-inline label {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.radio-group-inline .radio-group-items {
+  display: flex;
+  margin: 0 24px;
+}
+
+.radio-group-inline .radio-group-items .radio-item {
+  height: 28px;
+  width: -webkit-fill-available;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0 1px;
+}
+
+.radio-group-inline .radio-group-items .radio-item label {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #828282;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio-group-inline .radio-group-items .radio-item input {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  -webkit-appearance: unset;
+  cursor: pointer;
+}
+
+.radio-group-inline .radio-group-items .radio-item input:checked+label {
+  background: #3B89FD;
+  color: #fff;
+  border-color: #3b89fd;
+}

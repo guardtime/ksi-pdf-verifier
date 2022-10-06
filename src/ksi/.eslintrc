@@ -1,0 +1,16 @@
+{
+  "extends": ["../.eslintrc", "plugin:jest/recommended", "plugin:prettier/recommended"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "no-param-reassign": "off",
+    "no-use-before-define": "off",
+    "import/no-mutable-exports": "off",
+    "import/extensions": "off",
+    "prefer-const": "error",
+    "no-console": "error"
+  }
+}

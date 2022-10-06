@@ -52,7 +52,7 @@
     "@babel/runtime": "^7.10.2",
     "@guardtime/common": "1.0.3",
     "@guardtime/ksi-js-api": "1.0.3-rc.a4a6ffa",
-    "node-forge": "^0.8.5",
+    "node-forge": "^1.3.0",
     "pako": "^1.0.11",
     "pdfjs-dist": "2.3.200",
     "valid-url": "^1.0.9",

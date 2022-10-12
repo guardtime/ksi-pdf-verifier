@@ -3,7 +3,8 @@ const fs = require('fs');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const { SourceMapDevToolPlugin } = require('webpack');
 
 const config = {
   entry: {
@@ -12,6 +13,12 @@ const config = {
   },
   module: {
     rules: [
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      },
       {
         test: /\.(m?js)$/,
         exclude: new RegExp('node_modules\\'+path.sep+'(?!@guardtime/ksi-js-api|@guardtime/gt-js-common).*'),
@@ -40,7 +47,7 @@ const config = {
     ]
   },
   output: {
-    filename: '[name].[hash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
@@ -58,8 +65,8 @@ const config = {
       template: 'index.html',
       favicon: 'favicon.ico',
       inject: 'head'
-    }),
-    new webpack.ExtendedAPIPlugin()
+    },),
+    new NodePolyfillPlugin()
   ]
 };
 
@@ -74,24 +81,25 @@ function addKsiTranslations(content, filePath) {
 module.exports = (env, argv) => {
   const defaultConfig = process.env.PDF_CONFIG || 'static/default_configuration.json';
   if (argv.mode === 'development') {
+    config.plugins.push(new SourceMapDevToolPlugin());
     config.plugins.push(
-        new CopyPlugin([
+        new CopyPlugin({ patterns: [
           { from: defaultConfig, to:"static/default_configuration.json"},
           { from: 'demo/signed.pdf', to: 'demo' },
           { from: 'node_modules/pdfjs-dist/cmaps/', to: 'cmaps' },
           { from: 'node_modules/pdf.js/l10n/', to: 'locale', transform(content, path) { return addKsiTranslations(content, path); }},
           { from: 'src/locale/locale.properties', to: 'locale'}
-        ]),
+        ]}),
     )
   }
   if (argv.mode === 'production') {
     config.plugins.push(
-        new CopyPlugin([
+        new CopyPlugin({ patterns: [
           { from: 'static/readonly_configuration.json', to:"static/default_configuration.json"},
           { from: 'node_modules/pdfjs-dist/cmaps/', to: 'cmaps' },
           { from: 'node_modules/pdf.js/l10n/', to: 'locale', transform(content, path) { return addKsiTranslations(content, path); }},
           { from: 'src/locale/locale.properties', to: 'locale'}
-        ]),
+        ]}),
     )
   }
   return config;

@@ -1,10 +1,10 @@
 {
-  "name": "gt-pdfjs",
+  "name": "ksi-pdf-verifier",
   "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git@git.ee.guardtime.com:developers/gt-pdfjs.git"
+    "url": "git@github.com:guardtime/ksi-pdf-verifier.git"
   },
   "main": "index.js",
   "scripts": {

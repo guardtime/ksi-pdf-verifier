@@ -1184,8 +1184,13 @@ class KsiWidgetAnnotation extends WidgetAnnotation {
 
     const sigStart = this.find(params.pdfManager.pdfDocument.stream.bytes,
       '/Contents ', ksiXref.offset) + '/Contents '.length;
-    const sigEnd = this.find(params.pdfManager.pdfDocument.stream.bytes,
+    let sigEnd = this.find(params.pdfManager.pdfDocument.stream.bytes,
       '/Filter/GT.KSI/ByteRange', sigStart);
+
+    if (sigEnd === -1) {
+      sigEnd = this.find(params.pdfManager.pdfDocument.stream.bytes,
+        '/FT/DocTimeStamp/Filter/GT.KSI', sigStart)
+    }
 
     let validByteRange = true;
     if (byteRange[0] !== 0) {
